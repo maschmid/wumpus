@@ -9,7 +9,7 @@
       
       <h:panelGroup rendered="#{not currentPlayer.loggedIn}">
    	   <h:form>
-      	<h:inputText value="#{currentPlayer.name}" /> <h:commandButton value="Login" action="#{lobbyAction.login()}" />
+      	<h:inputText value="#{currentPlayer.name}" /> <h:commandButton value="Login" action="#{lobbyAction.login}" />
        </h:form>
   
       </h:panelGroup>
@@ -18,18 +18,21 @@
       
       <h:form>
       
+      	<p>Players online:</p>
       	<ul>
+      		
       		<ui:repeat var="p" value="#{players}">
 		      	<li>#{p.name}</li>
       		</ui:repeat>
   	  		</ul>
   	  
+  	      <p>Games in progress:</p>
 	  	  <ul>
 	  	  	<ui:repeat var="g" value="#{games}">
 	  	  		<li><ui:repeat var="p" value="#{g.players}">
 	  	  				#{p.name}, 
 	  	  			</ui:repeat>
-	  	  			<h:commandButton value="Join" action="#{lobbyAction.joinGame(g.id)}"/>
+	  	  			<h:commandButton value="Join game" action="#{lobbyAction.joinGame(g.id)}"/>
 	  	  		</li>
   	  		</ui:repeat>
   	  	  </ul>
