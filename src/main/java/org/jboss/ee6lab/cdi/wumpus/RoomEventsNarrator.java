@@ -7,6 +7,7 @@ import javax.enterprise.event.Observes;
 import org.jboss.ee6lab.cdi.wumpus.observerorder.ObserverOrder;
 import org.jboss.ee6lab.cdi.wumpus.xmlbeans.Room;
 
+// TODO: order the events with our observerorder extension
 public class RoomEventsNarrator {
 	
 	/*
@@ -34,11 +35,11 @@ public class RoomEventsNarrator {
 		}
 	}
 	
-	public void roomDescriptionObserver(@Observes @ObserverOrder(0) PlayerEnteredRoomEvent event, GameMessage gameMessage, @Current Room currentRoom, @Current Player currentPlayer) {
+	public void roomDescriptionObserver(@Observes PlayerEnteredRoomEvent event, GameMessage gameMessage, @Current Room currentRoom, @Current Player currentPlayer) {
 		gameMessage.add(currentRoom.getDescription());
 	}
 	
-	public void roomSmellObserver(@Observes @ObserverOrder(2) PlayerEnteredRoomEvent event, GameMessage gameMessage, @Current Room currentRoom) {
+	public void roomSmellObserver(@Observes PlayerEnteredRoomEvent event, GameMessage gameMessage, @Current Room currentRoom) {
 		if (currentRoom.getNorth() != null && currentRoom.getNorth().getSmell() != null) {
 			gameMessage.add(currentRoom.getNorth().getSmell());
 		}
@@ -53,7 +54,7 @@ public class RoomEventsNarrator {
 		}
 	}
 	
-	public void playerSmellObserver(@Observes @ObserverOrder(3) PlayerEnteredRoomEvent event, GameMessage gameMessage, @Current Room currentRoom) {
+	public void playerSmellObserver(@Observes PlayerEnteredRoomEvent event, GameMessage gameMessage, @Current Room currentRoom) {
 		boolean smellsPlayer = false;
 		
 		if (currentRoom.getNorth() != null) {
@@ -82,7 +83,7 @@ public class RoomEventsNarrator {
 		}
 	}
 	
-	public void playerSightObserver(@Observes @ObserverOrder(1) PlayerEnteredRoomEvent event, GameMessage gameMessage, @Current Room currentRoom, @Current Player currentPlayer) {
+	public void playerSightObserver(@Observes PlayerEnteredRoomEvent event, GameMessage gameMessage, @Current Room currentRoom, @Current Player currentPlayer) {
 		for (Player player : currentRoom.getPlayers()) {
 			if (player != currentPlayer) {
 				gameMessage.add(player.getName() + " is in the room.");

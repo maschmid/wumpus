@@ -8,6 +8,6 @@ import javax.enterprise.inject.spi.Extension;
 
 public class GameScopeExtension implements Extension {
 	public void afterBeanDiscovery(@Observes AfterBeanDiscovery event, BeanManager manager) {
-        event.addContext(new GameContext(manager));
+		// TODO, register GameContext
     }
 }

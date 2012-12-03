@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.ee6lab.cdi.wumpus.Player;
-import org.jboss.ee6lab.cdi.wumpus.scope.GameScoped;
 
-@GameScoped
 public class Room implements Serializable {
 
 	/**
@@ -15,17 +13,17 @@ public class Room implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Room north;
+	protected Room north;
 
-	private Room south;
+	protected Room south;
 
-	private Room east;
+	protected Room east;
 
-	private Room west;
+	protected Room west;
 
-	private String description;
+	protected String description;
 	
-	private String smell;
+	protected String smell;
 
 	public String getDescription() {
 		return description;

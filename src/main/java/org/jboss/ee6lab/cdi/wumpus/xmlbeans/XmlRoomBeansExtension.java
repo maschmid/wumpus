@@ -57,43 +57,6 @@ public class XmlRoomBeansExtension implements Extension {
 	}
 	
 	private void addRoom(BeforeBeanDiscovery event, BeanManager beanManager, String roomName, String description, String smell, String northRoom, String eastRoom, String southRoom, String westRoom) throws SecurityException, NoSuchFieldException {
-		AnnotatedTypeBuilder<Room>  fb = new AnnotatedTypeBuilder<Room>();
-		fb.readFromType(Room.class);
-		
-		fb.addToClass(new RoomName.RoomNameLiteral(roomName));
-		
-		if (northRoom != null && !northRoom.isEmpty()) {
-			fb.addToField(Room.class.getDeclaredField("north"), InjectLiteral.INSTANCE);
-			fb.addToField(Room.class.getDeclaredField("north"), new RoomName.RoomNameLiteral(northRoom));
-		}
-		
-		if (eastRoom != null && !eastRoom.isEmpty()) {
-			fb.addToField(Room.class.getDeclaredField("east"), InjectLiteral.INSTANCE);
-			fb.addToField(Room.class.getDeclaredField("east"), new RoomName.RoomNameLiteral(eastRoom));
-		}
-		
-		if (southRoom != null && !southRoom.isEmpty()) {
-			fb.addToField(Room.class.getDeclaredField("south"), InjectLiteral.INSTANCE);
-			fb.addToField(Room.class.getDeclaredField("south"), new RoomName.RoomNameLiteral(southRoom));
-		}
-		
-		if (westRoom != null && !westRoom.isEmpty()) {
-			fb.addToField(Room.class.getDeclaredField("west"), InjectLiteral.INSTANCE);
-			fb.addToField(Room.class.getDeclaredField("west"), new RoomName.RoomNameLiteral(westRoom));
-		}
-		
-		Map<String, String> values = new HashMap<String, String>();
-		values.put("value", description);
-		fb.addToField(Room.class.getDeclaredField("description"), AnnotationInstanceProvider.of(StringsEntry.class, values));
-		fb.addToField(Room.class.getDeclaredField("description"), InjectLiteral.INSTANCE);
-		
-		if (!smell.isEmpty()) {
-			values = new HashMap<String, String>();
-			values.put("value", smell);
-			fb.addToField(Room.class.getDeclaredField("smell"), AnnotationInstanceProvider.of(StringsEntry.class, values));
-			fb.addToField(Room.class.getDeclaredField("smell"), InjectLiteral.INSTANCE);
-		}
-
-		event.addAnnotatedType(fb.create());
+		// TODO create the annotated type
 	}
 }

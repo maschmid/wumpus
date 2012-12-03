@@ -28,23 +28,24 @@ public class GamesManager {
 	
 	Map<Integer, Game> games = new HashMap<Integer, Game>();
 	
+	/*
 	private GameContext getGameContext() {
 		return (GameContext)beanManager.getContext(GameScoped.class);
-	}
+	}*/
 	
-	public Game getGame(int gid) {
+	public synchronized Game getGame(int gid) {
 		return games.get(gid);
 	}
 	
 	@Produces
 	@Named
-	public List<Game> getGames() {
+	public synchronized List<Game> getGames() {
 		return new ArrayList<Game> (games.values());
 	}
 	
 	public synchronized void removeGame(Game game) {	
 		games.remove(game.getId());
-		getGameContext().deleteGame(game.getId());
+		//getGameContext().deleteGame(game.getId());
 	}
 	
 	public synchronized Game createNewGame() {
@@ -52,7 +53,7 @@ public class GamesManager {
 		game.setId(++counter);
 		
 		games.put(game.getId(), game);
-		getGameContext().createGame(game.getId());
+		//getGameContext().createGame(game.getId());
 		
 		return game;
 	}
@@ -79,7 +80,7 @@ public class GamesManager {
 			if (game.getPlayers().isEmpty()) {
 				// Remove the game if no players left
 				games.remove(gameId);
-				getGameContext().deleteGame(gameId);
+			    //	getGameContext().deleteGame(gameId);
 			}
 		}
 	}

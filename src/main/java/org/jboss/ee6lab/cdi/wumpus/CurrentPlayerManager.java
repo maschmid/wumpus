@@ -14,6 +14,7 @@ import javax.inject.Named;
 import org.jboss.ee6lab.cdi.wumpus.scope.CurrentGameId;
 import org.jboss.ee6lab.cdi.wumpus.scope.GamesManager;
 import org.jboss.ee6lab.cdi.wumpus.xmlbeans.Room;
+import org.jboss.ee6lab.cdi.wumpus.xmlbeans.RoomName;
 
 @SessionScoped
 public class CurrentPlayerManager implements Serializable {
@@ -29,7 +30,9 @@ public class CurrentPlayerManager implements Serializable {
 	private Player currentPlayer;
 	
 	@Inject
-	@Random
+	@RoomName("entry")
+	// TODO: Inject a random room instead
+	// @Random
 	private Instance<Room> initialRoom;
 	
 	@Inject

@@ -27,21 +27,8 @@ public class GameContext extends AbstractContext {
 	}
 
 	private int getCurrentGameId() {
-		
-		Set<Bean<?>> beans = beanManager.getBeans(Integer.class, new CurrentGameId.CurrentGameIdLiteral());
-		if (beans.size() == 1) {
-			Bean<Integer> bean = (Bean<Integer>)beans.iterator().next();
-			
-			CreationalContext<Integer> ctx = beanManager.createCreationalContext(bean);
-			Integer gid = (Integer)beanManager.getReference(bean,  Integer.class, ctx);
-			
-			bean.destroy(gid, ctx);
-			
-			return gid;
-		}
-		else {
-			throw new IllegalStateException("no unambiguous CurrentGameId bean found");
-		}
+		// TODO: retrieve the '@CurrentGameId Integer' contextual instance  
+		return 1;
 	}
 	
 	private ContextualStorage createGameStorage(int gid) {

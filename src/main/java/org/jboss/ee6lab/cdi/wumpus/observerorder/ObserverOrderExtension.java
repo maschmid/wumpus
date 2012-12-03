@@ -44,26 +44,7 @@ public class ObserverOrderExtension implements Extension {
 	<T, X> void processObserverMethod(@Observes ProcessObserverMethod<T, X> pom) {
 		
 		System.out.println("XXX processObserverMethod on " + pom.getObserverMethod().toString());
-				
-		for (Annotation annotation : pom.getObserverMethod().getObservedQualifiers()) {
-			if (annotation.annotationType().equals(ObserverOrder.class)) {
-				System.out.println("XXX: found orderable observer!!!");
-				
-				ObserverOrder order = (ObserverOrder)annotation;
-				int orderValue = order.value();
-				Type type = pom.getObserverMethod().getObservedType();
-				
-				if (!observersMap.containsKey(type)) {
-					observersMap.put(type, new TreeSet<OrderedObserverMethod> ());
-				}
-				
-				for (Annotation observedQualifier : pom.getObserverMethod().getObservedQualifiers()) {
-					System.out.println("XXX Observed qualifier: " + observedQualifier.toString());
-				}
-				
-				observersMap.get(type).add(new OrderedObserverMethod(orderValue, pom.getObserverMethod()));
-			}
-		}
+		// TODO: check if the observer observes a @ObserverOrder qualifier and put it into the observersMap if so.
 	}
 	
 	void afterBeanDiscovery(@Observes AfterBeanDiscovery abd) {
@@ -107,8 +88,7 @@ public class ObserverOrderExtension implements Extension {
 
 				@Override
 				public void notify(Object event) {
-					for (OrderedObserverMethod observer : observers) {
-												
+					for (OrderedObserverMethod observer : observers) {					
 						observer.getObserverMethod().notify(event);
 					}
 				}
