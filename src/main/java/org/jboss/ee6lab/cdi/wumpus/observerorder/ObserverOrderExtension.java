@@ -26,18 +26,10 @@ public class ObserverOrderExtension implements Extension {
 			this.observerMethod = observerMethod;
 		}
 		
-		public int getOrder() {
-			return order;
-		}
-		public void setOrder(int order) {
-			this.order = order;
-		}
 		public ObserverMethod getObserverMethod() {
 			return observerMethod;
 		}
-		public void setObserverMethod(ObserverMethod observerMethod) {
-			this.observerMethod = observerMethod;
-		}
+	
 		private int order;
 		private ObserverMethod observerMethod;
 		
@@ -108,6 +100,7 @@ public class ObserverOrderExtension implements Extension {
 					return TransactionPhase.IN_PROGRESS;
 				}
 				
+				// Weld 2.0.0.Beta1 thing, ignore
 				public void notify(Object event, Set set) {
 					notify(event);
 				}
@@ -115,9 +108,7 @@ public class ObserverOrderExtension implements Extension {
 				@Override
 				public void notify(Object event) {
 					for (OrderedObserverMethod observer : observers) {
-						
-						// System.out.println("XXX notifying observer: " + observer.getObserverMethod().toString());
-						
+												
 						observer.getObserverMethod().notify(event);
 					}
 				}

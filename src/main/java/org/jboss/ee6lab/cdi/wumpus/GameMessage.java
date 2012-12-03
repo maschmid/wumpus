@@ -3,7 +3,6 @@ package org.jboss.ee6lab.cdi.wumpus;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Named;
 

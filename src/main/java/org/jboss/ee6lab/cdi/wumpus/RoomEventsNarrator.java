@@ -1,6 +1,5 @@
 package org.jboss.ee6lab.cdi.wumpus;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.event.Observes;
