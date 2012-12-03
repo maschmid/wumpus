@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+
+	  <h:panelGroup rendered="#{not currentPlayer.shot}">
+	  
+      <h:form>
+      
+      	<div>
+	      	<h:outputText value="#{gameMessage.message}" />
+		</div>
+	
+		<div>	      	
+      		<h:messages />
+      	</div>
+      	
+      	<table>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="3"><b>Move</b></td>
+                            </tr>
+                            <tr>
+                                <td/>
+                                <td>
+                                    <h:commandButton id="movenorth"
+                                                     disabled="#{empty currentRoom.north}"
+                                                     action="#{roomAction.north()}" value="North"/>
+                                </td>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:commandButton id="movewest"
+                                                     disabled="#{empty currentRoom.west}"
+                                                     action="#{roomAction.west()}" value="West"/>
+                                </td>
+                                <td/>
+                                <td>
+                                    <h:commandButton id="moveeast"
+                                                     disabled="#{empty currentRoom.east}"
+                                                     action="#{roomAction.east()}" value="East"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td/>
+                                <td>
+                                    <h:commandButton id="movesouth"
+                                                     disabled="#{empty currentRoom.south}"
+                                                     action="#{roomAction.south()}" value="South"/>
+                                </td>
+                                <td/>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="3"><b>Shoot</b></td>
+                            </tr>
+                            <tr>
+                                <td/>
+                                <td>
+                                    <h:commandButton id="shotnorth"
+                                                     disabled="#{empty currentRoom.north}"
+                                                     action="#{roomAction.shootNorth}" value="North"/>
+                                </td>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:commandButton id="shotwest"
+                                                     disabled="#{empty currentRoom.west}"
+                                                     action="#{roomAction.shootWest}" value="West"/>
+                                </td>
+                                <td/>
+                                <td>
+                                    <h:commandButton id="shoteast"
+                                                     disabled="#{empty currentRoom.east}"
+                                                     action="#{roomAction.shootEast}" value="East"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td/>
+                                <td>
+                                    <h:commandButton id="shotsouth"
+                                                     disabled="#{empty currentRoom.south}"
+                                                     action="#{roomAction.shootSouth}" value="South"/>
+                                </td>
+                                <td/>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+	  </h:form>
+	  
+	  <h:form>
+		  <h:commandButton value="Leave game" action="#{lobbyAction.leaveGame()}"/>
+	  </h:form>
+	  
+	  </h:panelGroup>
+	  
+	  <h:panelGroup rendered="#{currentPlayer.shot}">
+	  	You have been shot while you were idly standing!
+	  	
+	  	<h:form>
+		  	<h:commandButton value="Rest in Peace" action="#{lobbyAction.leaveGame()}"/>
+	  	</h:form>
+	  </h:panelGroup>
+   
+   </ui:define>
+</ui:composition>
