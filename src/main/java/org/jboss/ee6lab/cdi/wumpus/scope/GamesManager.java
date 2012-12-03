@@ -32,6 +32,10 @@ public class GamesManager {
 		return (GameContext)beanManager.getContext(GameScoped.class);
 	}
 	
+	public Game getGame(int gid) {
+		return games.get(gid);
+	}
+	
 	@Produces
 	@Named
 	public List<Game> getGames() {

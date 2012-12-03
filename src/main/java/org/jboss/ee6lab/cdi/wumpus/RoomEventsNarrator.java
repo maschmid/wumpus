@@ -11,7 +11,7 @@ import org.jboss.ee6lab.cdi.wumpus.xmlbeans.Room;
 public class RoomEventsNarrator {
 	
 	/*
-	 * Implements the logic of killing players by an arror
+	 * Implements the logic of killing players by an arrow
 	 */
 	public void shootAtRoomObserver(@Observes PlayerShootAtRoomEvent event, GameMessage gameMessage, @Current Player currentPlayer) {
 		

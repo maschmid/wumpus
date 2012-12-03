@@ -24,42 +24,34 @@ public class RoomAction {
 		currentPlayerManager.shootAt(room);
 	}
 
-	@IsAlive
 	public void north() {
 		moveTo(currentRoomInstance.get().getNorth());
 	}
 	
-	@IsAlive
 	public void south() {
 		moveTo(currentRoomInstance.get().getSouth());
 	}
 	
-	@IsAlive
 	public void east() {
 		moveTo(currentRoomInstance.get().getEast());
 	}
 	
-	@IsAlive
 	public void west() {
 		moveTo(currentRoomInstance.get().getWest());
 	}
 	
-	@IsAlive
 	public void shootNorth() {
 		shootAt(currentRoomInstance.get().getNorth());
 	}
 	
-	@IsAlive
 	public void shootSouth() {
 		shootAt(currentRoomInstance.get().getSouth());
 	}
 	
-	@IsAlive
 	public void shootEast() {
 		shootAt(currentRoomInstance.get().getEast());
 	}
 
-	@IsAlive
 	public void shootWest() {
 		shootAt(currentRoomInstance.get().getWest());
 	}

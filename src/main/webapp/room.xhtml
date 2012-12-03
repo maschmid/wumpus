@@ -5,9 +5,7 @@
    xmlns:h="http://java.sun.com/jsf/html"
    template="/WEB-INF/templates/default.xhtml">
    <ui:define name="content">
-
-	  <h:panelGroup rendered="#{currentPlayer.alive}">
-	  
+ 
       <h:form>
       
       	<div>
@@ -103,7 +101,6 @@
 	  <h:form>
 		  <h:commandButton value="Leave game" action="#{lobbyAction.leaveGame}"/>
 	  </h:form>
-	  
-	  </h:panelGroup>
+
    </ui:define>
 </ui:composition>

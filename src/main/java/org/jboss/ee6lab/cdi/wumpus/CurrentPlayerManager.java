@@ -1,6 +1,7 @@
 package org.jboss.ee6lab.cdi.wumpus;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.SessionScoped;
@@ -65,6 +66,12 @@ public class CurrentPlayerManager implements Serializable {
 	@Named
 	public Player getCurrentPlayer() {
 		return currentPlayer;
+	}
+	
+	@Produces
+	@Current
+	public List<Player> getCurrentPlayers() {
+		return gamesManager.getGame(currentGameId).getPlayers();
 	}
 	
 	@Inject
