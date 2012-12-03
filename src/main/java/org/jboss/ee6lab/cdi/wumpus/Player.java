@@ -11,8 +11,9 @@ public class Player implements Serializable {
 
 	private String name = "Anonymous";
 		
-	private boolean shot = false;
+	private boolean alive = true;
 	private boolean loggedIn = false;
+	private String deathMessage = null;
 	
 	public String getName() {
 		return name;
@@ -22,12 +23,12 @@ public class Player implements Serializable {
 		this.name = name;
 	}
 
-	public boolean isShot() {
-		return shot;
+	public boolean isAlive() {
+		return alive;
 	}
 
-	public void setShot(boolean shot) {
-		this.shot = shot;
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 	public boolean isLoggedIn() {
@@ -36,5 +37,13 @@ public class Player implements Serializable {
 
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
+	}
+
+	public String getDeathMessage() {
+		return deathMessage;
+	}
+
+	public void setDeathMessage(String deathMessage) {
+		this.deathMessage = deathMessage;
 	}
 }

@@ -70,7 +70,7 @@ public class GamesManager {
 		Game game = games.get(gameId);
 
 		if (game != null) {
-			game.getPlayers().remove(player);		
+			game.getPlayers().remove(player);
 			
 			if (game.getPlayers().isEmpty()) {
 				// Remove the game if no players left

@@ -107,12 +107,16 @@ public class ObserverOrderExtension implements Extension {
 				public TransactionPhase getTransactionPhase() {
 					return TransactionPhase.IN_PROGRESS;
 				}
+				
+				public void notify(Object event, Set set) {
+					notify(event);
+				}
 
 				@Override
 				public void notify(Object event) {
 					for (OrderedObserverMethod observer : observers) {
 						
-						System.out.println("XXX notifying observer: " + observer.getObserverMethod().toString());
+						// System.out.println("XXX notifying observer: " + observer.getObserverMethod().toString());
 						
 						observer.getObserverMethod().notify(event);
 					}

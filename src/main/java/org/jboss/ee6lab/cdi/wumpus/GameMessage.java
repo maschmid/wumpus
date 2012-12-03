@@ -23,8 +23,14 @@ public class GameMessage implements Serializable {
 	}
 
 	public String getMessage() {
+		
 		String ret = builder.toString();
 		builder = new StringBuilder();
+		
+		if (ret.isEmpty()) {
+			return "Nothing happens...";
+		}
+		
 		return ret;
 	}
 }

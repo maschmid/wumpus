@@ -19,12 +19,12 @@ public class IsAliveInterceptor implements Serializable {
 	
 	@Inject
 	@Current
-	Instance<Player> currentPlayer;
-
+	Instance<Player> currentPlayerInstance;
+	
 	@AroundInvoke
 	public Object manage(InvocationContext ic) throws Exception {
 		
-		if (!currentPlayer.get().isShot()) {
+		if (currentPlayerInstance.get().isAlive()) {
 			// I'am doing science and I'am still alive!	
 			return ic.proceed();
 		}

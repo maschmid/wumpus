@@ -47,6 +47,9 @@ public class CurrentPlayerManager implements Serializable {
 	Event<PlayerEnteredRoomEvent> playerEnteredRoomEvent;
 	
 	@Inject
+	Event<PlayerShootAtRoomEvent> playerShootAtRoomEvent;
+	
+	@Inject
 	GamesManager gamesManager;
 	
 	private Room currentRoom;
@@ -69,12 +72,15 @@ public class CurrentPlayerManager implements Serializable {
 	
 	public void joinGame(int gameId) {
 		currentGameId = gameId;
-		currentPlayer.setShot(false);
+		currentPlayer.setAlive(true);
 		moveTo(initialRoom.get());
 		playerJoinedGameEvent.fire(new PlayerJoinedGameEvent());
 	}
 	
 	public void leaveGame() {
+		
+		moveTo(null);
+		
 		playerLeftGameEvent.fire(new PlayerLeftGameEvent());
 		
 		currentGameId = 0;
@@ -82,11 +88,12 @@ public class CurrentPlayerManager implements Serializable {
 	}
 	
 	public void moveTo(Room room) {
+		
+		if (currentRoom != null) {
+			currentRoom.removePlayer(currentPlayer);
+		}
+		
 		if (room != null) {
-			if (currentRoom != null) {
-				currentRoom.removePlayer(currentPlayer);
-			}
-			
 			currentRoom = room;
 			room.addPlayer(currentPlayer);
 	
@@ -95,12 +102,7 @@ public class CurrentPlayerManager implements Serializable {
 	}
 	
 	public void shootAt(Room room) {
-		if (room.shootAt()) {
-			gameMessage.add("Your arrow hit a target!");
-		}
-		else {
-			gameMessage.add("Nothing happens...");
-		}
+		playerShootAtRoomEvent.fire(new PlayerShootAtRoomEvent(room));
 	}
 
 	@Produces
@@ -117,6 +119,9 @@ public class CurrentPlayerManager implements Serializable {
 	
 	@PreDestroy
 	public void preDestroy() {
+		
+		moveTo(null);
+		
 		playerLeftGameEvent.fire(new PlayerLeftGameEvent());
 		playerLogoffEvent.fire(new PlayerLogoffEvent());
 		System.out.println("XXX predestroy on " + currentPlayer.getName());

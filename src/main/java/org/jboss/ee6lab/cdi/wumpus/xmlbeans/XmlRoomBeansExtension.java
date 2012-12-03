@@ -36,6 +36,7 @@ public class XmlRoomBeansExtension implements Extension {
             	
             	String id = room.getAttribute("id");
             	String description = room.getAttribute("description");
+            	String smell = room.getAttribute("smell");
             	String north = room.getAttribute("north");
             	String south = room.getAttribute("south");
             	String west = room.getAttribute("west");
@@ -43,8 +44,7 @@ public class XmlRoomBeansExtension implements Extension {
             	
             	System.out.println("Creating room "+ id + " " + description + " " + north + " " + east + " " + south + " " + west);
             	
-            	
-            	addRoom(event, beanManager, id, description, north, east, south, west);
+            	addRoom(event, beanManager, id, description, smell, north, east, south, west);
             }
             
         } catch (ParserConfigurationException e) {
@@ -56,7 +56,7 @@ public class XmlRoomBeansExtension implements Extension {
         }
 	}
 	
-	private void addRoom(BeforeBeanDiscovery event, BeanManager beanManager, String roomName, String description, String northRoom, String eastRoom, String southRoom, String westRoom) throws SecurityException, NoSuchFieldException {
+	private void addRoom(BeforeBeanDiscovery event, BeanManager beanManager, String roomName, String description, String smell, String northRoom, String eastRoom, String southRoom, String westRoom) throws SecurityException, NoSuchFieldException {
 		AnnotatedTypeBuilder<Room>  fb = new AnnotatedTypeBuilder<Room>();
 		fb.readFromType(Room.class);
 		
@@ -86,6 +86,13 @@ public class XmlRoomBeansExtension implements Extension {
 		values.put("value", description);
 		fb.addToField(Room.class.getDeclaredField("description"), AnnotationInstanceProvider.of(StringsEntry.class, values));
 		fb.addToField(Room.class.getDeclaredField("description"), InjectLiteral.INSTANCE);
+		
+		if (!smell.isEmpty()) {
+			values = new HashMap<String, String>();
+			values.put("value", smell);
+			fb.addToField(Room.class.getDeclaredField("smell"), AnnotationInstanceProvider.of(StringsEntry.class, values));
+			fb.addToField(Room.class.getDeclaredField("smell"), InjectLiteral.INSTANCE);
+		}
 
 		event.addAnnotatedType(fb.create());
 	}

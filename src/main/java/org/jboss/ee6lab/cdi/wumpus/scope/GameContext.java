@@ -82,10 +82,17 @@ public class GameContext extends AbstractContext {
 		int gid = getCurrentGameId();
 		
 		if (gameStores.containsKey(gid)) {
+			
+			System.out.println("XXX getContextualStorage " + createIfNotExist + " returning existign contextual Storage");
+			
 			return gameStores.get(gid);
 		}
 		
-		throw new IllegalStateException("Accessing non-existing game context!");
+		if (createIfNotExist) {
+			throw new IllegalStateException("Accessing non-existing game context: " + gid + ".");
+		}
+		
+		return null;
 	}
 
 	@Override
